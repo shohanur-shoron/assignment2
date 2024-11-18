@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+    </style>
+    <title>Contact List</title>
+</head>
+<body>
+
+    <div class="topBtns">
+        <a href="{% url 'create_contact' %}" class="btns"><i class='bx bx-add-to-queue' ></i>Add a Contact</a>
+        <a href="{% url 'contact_list' %}" class="btns active"><i class='bx bx-list-ul' ></i>Contact List</a>
+    </div>
+
+    <div class="viewStudent">
+        <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                  <tr>
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.phone }}</td>
+                    {% if contact.email %}
+                        <td>{{ contact.email }}</td>
+                    {% else %}
+                        <td>None</td>
+                    {% endif %}
+                    <td><a href="{% url 'update_contact' contact.id %}" class="update"><i class='bx bx-edit-alt'></i></a><a href="{% url 'delete_contact' contact.id %}" class="delete"><i class='bx bx-message-square-x'></i></a></td>
+                  </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
+
+</body>
+</html>
